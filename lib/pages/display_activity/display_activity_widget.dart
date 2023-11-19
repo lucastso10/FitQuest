@@ -119,6 +119,7 @@ class _DisplayActivityWidgetState extends State<DisplayActivityWidget> {
                       focusedErrorBorder: InputBorder.none,
                     ),
                     style: FlutterFlowTheme.of(context).displayLarge,
+                    maxLines: 2,
                     validator:
                         _model.textControllerValidator.asValidator(context),
                   ),

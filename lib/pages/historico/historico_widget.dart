@@ -3,11 +3,11 @@ import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import 'display_day_model.dart';
-export 'display_day_model.dart';
+import 'historico_model.dart';
+export 'historico_model.dart';
 
-class DisplayDayWidget extends StatefulWidget {
-  const DisplayDayWidget({
+class HistoricoWidget extends StatefulWidget {
+  const HistoricoWidget({
     super.key,
     required this.dia,
   });
@@ -15,18 +15,18 @@ class DisplayDayWidget extends StatefulWidget {
   final DateTime? dia;
 
   @override
-  _DisplayDayWidgetState createState() => _DisplayDayWidgetState();
+  _HistoricoWidgetState createState() => _HistoricoWidgetState();
 }
 
-class _DisplayDayWidgetState extends State<DisplayDayWidget> {
-  late DisplayDayModel _model;
+class _HistoricoWidgetState extends State<HistoricoWidget> {
+  late HistoricoModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => DisplayDayModel());
+    _model = createModel(context, () => HistoricoModel());
   }
 
   @override

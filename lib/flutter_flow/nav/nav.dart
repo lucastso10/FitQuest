@@ -62,6 +62,13 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => CreatedWidget(
             index: params.getParam('index', ParamType.int),
           ),
+        ),
+        FFRoute(
+          name: 'Historico',
+          path: '/historico',
+          builder: (context, params) => HistoricoWidget(
+            dia: params.getParam('dia', ParamType.DateTime),
+          ),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
