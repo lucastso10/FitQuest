@@ -341,6 +341,10 @@ class _CreatedWidgetState extends State<CreatedWidget> {
                             FFAppState().Activities[widget.index!].coins;
                       });
                       setState(() {
+                        FFAppState().addToOldActivities(
+                            FFAppState().Activities[widget.index!]);
+                      });
+                      setState(() {
                         FFAppState().removeAtIndexFromActivities(widget.index!);
                       });
 

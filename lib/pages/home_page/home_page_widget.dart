@@ -87,9 +87,18 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                   child: Padding(
                     padding:
                         const EdgeInsetsDirectional.fromSTEB(50.0, 150.0, 0.0, 0.0),
-                    child: Text(
-                      'Histórico',
-                      style: FlutterFlowTheme.of(context).titleMedium,
+                    child: InkWell(
+                      splashColor: Colors.transparent,
+                      focusColor: Colors.transparent,
+                      hoverColor: Colors.transparent,
+                      highlightColor: Colors.transparent,
+                      onTap: () async {
+                        context.pushNamed('Historico');
+                      },
+                      child: Text(
+                        'Histórico',
+                        style: FlutterFlowTheme.of(context).titleMedium,
+                      ),
                     ),
                   ),
                 ),

@@ -36,6 +36,21 @@ class FFAppState extends ChangeNotifier {
               .toList() ??
           _Activities;
     });
+    _safeInit(() {
+      _oldActivities = prefs
+              .getStringList('ff_oldActivities')
+              ?.map((x) {
+                try {
+                  return ActivityStruct.fromSerializableMap(jsonDecode(x));
+                } catch (e) {
+                  print("Can't decode persisted data type. Error: $e.");
+                  return null;
+                }
+              })
+              .withoutNulls
+              .toList() ??
+          _oldActivities;
+    });
   }
 
   void update(VoidCallback callback) {
@@ -91,6 +106,47 @@ class FFAppState extends ChangeNotifier {
     _Activities.insert(index, value);
     prefs.setStringList(
         'ff_Activities', _Activities.map((x) => x.serialize()).toList());
+  }
+
+  List<ActivityStruct> _oldActivities = [];
+  List<ActivityStruct> get oldActivities => _oldActivities;
+  set oldActivities(List<ActivityStruct> value) {
+    _oldActivities = value;
+    prefs.setStringList(
+        'ff_oldActivities', value.map((x) => x.serialize()).toList());
+  }
+
+  void addToOldActivities(ActivityStruct value) {
+    _oldActivities.add(value);
+    prefs.setStringList(
+        'ff_oldActivities', _oldActivities.map((x) => x.serialize()).toList());
+  }
+
+  void removeFromOldActivities(ActivityStruct value) {
+    _oldActivities.remove(value);
+    prefs.setStringList(
+        'ff_oldActivities', _oldActivities.map((x) => x.serialize()).toList());
+  }
+
+  void removeAtIndexFromOldActivities(int index) {
+    _oldActivities.removeAt(index);
+    prefs.setStringList(
+        'ff_oldActivities', _oldActivities.map((x) => x.serialize()).toList());
+  }
+
+  void updateOldActivitiesAtIndex(
+    int index,
+    ActivityStruct Function(ActivityStruct) updateFn,
+  ) {
+    _oldActivities[index] = updateFn(_oldActivities[index]);
+    prefs.setStringList(
+        'ff_oldActivities', _oldActivities.map((x) => x.serialize()).toList());
+  }
+
+  void insertAtIndexInOldActivities(int index, ActivityStruct value) {
+    _oldActivities.insert(index, value);
+    prefs.setStringList(
+        'ff_oldActivities', _oldActivities.map((x) => x.serialize()).toList());
   }
 
   bool _NomeUnvalid = false;
