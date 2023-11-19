@@ -12,11 +12,13 @@ class ActivityStruct extends BaseStruct {
     bool? completed,
     DateTime? timeStart,
     DateTime? timeEnd,
+    DateTime? date,
   })  : _name = name,
         _coins = coins,
         _completed = completed,
         _timeStart = timeStart,
-        _timeEnd = timeEnd;
+        _timeEnd = timeEnd,
+        _date = date;
 
   // "Name" field.
   String? _name;
@@ -49,12 +51,19 @@ class ActivityStruct extends BaseStruct {
   set timeEnd(DateTime? val) => _timeEnd = val;
   bool hasTimeEnd() => _timeEnd != null;
 
+  // "date" field.
+  DateTime? _date;
+  DateTime? get date => _date;
+  set date(DateTime? val) => _date = val;
+  bool hasDate() => _date != null;
+
   static ActivityStruct fromMap(Map<String, dynamic> data) => ActivityStruct(
         name: data['Name'] as String?,
         coins: castToType<int>(data['Coins']),
         completed: data['Completed'] as bool?,
         timeStart: data['TimeStart'] as DateTime?,
         timeEnd: data['TimeEnd'] as DateTime?,
+        date: data['date'] as DateTime?,
       );
 
   static ActivityStruct? maybeFromMap(dynamic data) =>
@@ -66,6 +75,7 @@ class ActivityStruct extends BaseStruct {
         'Completed': _completed,
         'TimeStart': _timeStart,
         'TimeEnd': _timeEnd,
+        'date': _date,
       }.withoutNulls;
 
   @override
@@ -88,6 +98,10 @@ class ActivityStruct extends BaseStruct {
         ),
         'TimeEnd': serializeParam(
           _timeEnd,
+          ParamType.DateTime,
+        ),
+        'date': serializeParam(
+          _date,
           ParamType.DateTime,
         ),
       }.withoutNulls;
@@ -119,6 +133,11 @@ class ActivityStruct extends BaseStruct {
           ParamType.DateTime,
           false,
         ),
+        date: deserializeParam(
+          data['date'],
+          ParamType.DateTime,
+          false,
+        ),
       );
 
   @override
@@ -131,12 +150,13 @@ class ActivityStruct extends BaseStruct {
         coins == other.coins &&
         completed == other.completed &&
         timeStart == other.timeStart &&
-        timeEnd == other.timeEnd;
+        timeEnd == other.timeEnd &&
+        date == other.date;
   }
 
   @override
-  int get hashCode =>
-      const ListEquality().hash([name, coins, completed, timeStart, timeEnd]);
+  int get hashCode => const ListEquality()
+      .hash([name, coins, completed, timeStart, timeEnd, date]);
 }
 
 ActivityStruct createActivityStruct({
@@ -145,6 +165,7 @@ ActivityStruct createActivityStruct({
   bool? completed,
   DateTime? timeStart,
   DateTime? timeEnd,
+  DateTime? date,
 }) =>
     ActivityStruct(
       name: name,
@@ -152,4 +173,5 @@ ActivityStruct createActivityStruct({
       completed: completed,
       timeStart: timeStart,
       timeEnd: timeEnd,
+      date: date,
     );

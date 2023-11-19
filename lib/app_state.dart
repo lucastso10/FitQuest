@@ -92,6 +92,36 @@ class FFAppState extends ChangeNotifier {
     prefs.setStringList(
         'ff_Activities', _Activities.map((x) => x.serialize()).toList());
   }
+
+  bool _NomeUnvalid = false;
+  bool get NomeUnvalid => _NomeUnvalid;
+  set NomeUnvalid(bool value) {
+    _NomeUnvalid = value;
+  }
+
+  bool _semanaUnvalid = false;
+  bool get semanaUnvalid => _semanaUnvalid;
+  set semanaUnvalid(bool value) {
+    _semanaUnvalid = value;
+  }
+
+  bool _comecoUnvalid = false;
+  bool get comecoUnvalid => _comecoUnvalid;
+  set comecoUnvalid(bool value) {
+    _comecoUnvalid = value;
+  }
+
+  bool _finalUnvalid = false;
+  bool get finalUnvalid => _finalUnvalid;
+  set finalUnvalid(bool value) {
+    _finalUnvalid = value;
+  }
+
+  bool _comefiUnvalid = false;
+  bool get comefiUnvalid => _comefiUnvalid;
+  set comefiUnvalid(bool value) {
+    _comefiUnvalid = value;
+  }
 }
 
 LatLng? _latLngFromString(String? val) {

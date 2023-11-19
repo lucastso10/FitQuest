@@ -116,20 +116,13 @@ class _DisplayDayWidgetState extends State<DisplayDayWidget> {
                       ),
                       Align(
                         alignment: const AlignmentDirectional(0.00, 1.00),
-                        child: InkWell(
-                          splashColor: Colors.transparent,
-                          focusColor: Colors.transparent,
-                          hoverColor: Colors.transparent,
-                          highlightColor: Colors.transparent,
-                          onTap: () async {},
-                          child: Text(
-                            '+ atividade',
-                            style:
-                                FlutterFlowTheme.of(context).bodyLarge.override(
-                                      fontFamily: 'Readex Pro',
-                                      fontSize: 20.0,
-                                    ),
-                          ),
+                        child: Text(
+                          '+ atividade',
+                          style:
+                              FlutterFlowTheme.of(context).bodyLarge.override(
+                                    fontFamily: 'Readex Pro',
+                                    fontSize: 20.0,
+                                  ),
                         ),
                       ),
                     ],
