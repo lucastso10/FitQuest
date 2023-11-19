@@ -41,6 +41,13 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'HomePage',
           path: '/homePage',
           builder: (context, params) => const HomePageWidget(),
+        ),
+        FFRoute(
+          name: 'DisplayDay',
+          path: '/displayDay',
+          builder: (context, params) => DisplayDayWidget(
+            dia: params.getParam('dia', ParamType.DateTime),
+          ),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

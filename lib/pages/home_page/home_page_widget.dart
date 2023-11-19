@@ -3,6 +3,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 import 'home_page_model.dart';
 export 'home_page_model.dart';
 
@@ -42,6 +43,8 @@ class _HomePageWidgetState extends State<HomePageWidget> {
       );
     }
 
+    context.watch<FFAppState>();
+
     return GestureDetector(
       onTap: () => _model.unfocusNode.canRequestFocus
           ? FocusScope.of(context).requestFocus(_model.unfocusNode)
@@ -49,8 +52,65 @@ class _HomePageWidgetState extends State<HomePageWidget> {
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-        drawer: const Drawer(
+        drawer: Drawer(
           elevation: 16.0,
+          child: Container(
+            width: 100.0,
+            height: 100.0,
+            decoration: const BoxDecoration(
+              color: Colors.black,
+            ),
+            child: Stack(
+              children: [
+                Align(
+                  alignment: const AlignmentDirectional(-1.00, -1.00),
+                  child: Padding(
+                    padding:
+                        const EdgeInsetsDirectional.fromSTEB(50.0, 100.0, 0.0, 0.0),
+                    child: InkWell(
+                      splashColor: Colors.transparent,
+                      focusColor: Colors.transparent,
+                      hoverColor: Colors.transparent,
+                      highlightColor: Colors.transparent,
+                      onTap: () async {
+                        context.goNamed('HomePage');
+                      },
+                      child: Text(
+                        'Home',
+                        style: FlutterFlowTheme.of(context).titleMedium,
+                      ),
+                    ),
+                  ),
+                ),
+                Text(
+                  'Hello World',
+                  style: FlutterFlowTheme.of(context).bodyMedium,
+                ),
+                Align(
+                  alignment: const AlignmentDirectional(-1.00, -1.00),
+                  child: Padding(
+                    padding:
+                        const EdgeInsetsDirectional.fromSTEB(50.0, 150.0, 0.0, 0.0),
+                    child: Text(
+                      'Histórico',
+                      style: FlutterFlowTheme.of(context).titleMedium,
+                    ),
+                  ),
+                ),
+                Align(
+                  alignment: const AlignmentDirectional(-1.00, -1.00),
+                  child: Padding(
+                    padding:
+                        const EdgeInsetsDirectional.fromSTEB(50.0, 200.0, 0.0, 0.0),
+                    child: Text(
+                      'Criar Atividade',
+                      style: FlutterFlowTheme.of(context).titleMedium,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
         ),
         body: SafeArea(
           top: true,
@@ -89,9 +149,12 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                   weekFormat: false,
                   weekStartsMonday: true,
                   rowHeight: 64.0,
-                  onChange: (DateTimeRange? newSelectedDate) {
-                    setState(
-                        () => _model.calendarSelectedDay = newSelectedDate);
+                  onChange: (DateTimeRange? newSelectedDate) async {
+                    _model.calendarSelectedDay = newSelectedDate;
+
+                    context.pushNamed('HomePage');
+
+                    setState(() {});
                   },
                   titleStyle: FlutterFlowTheme.of(context).headlineSmall,
                   dayOfWeekStyle: FlutterFlowTheme.of(context).labelLarge,
@@ -108,28 +171,32 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                   decoration: const BoxDecoration(
                     color: Colors.black,
                   ),
-                  child: Stack(
-                    children: [
-                      Align(
-                        alignment: const AlignmentDirectional(-1.00, 1.00),
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(8.0),
-                          child: Image.network(
-                            'https://static.vecteezy.com/system/resources/previews/024/044/186/non_2x/money-coins-clipart-transparent-background-free-png.png',
-                            width: 63.0,
-                            height: 55.0,
-                            fit: BoxFit.fill,
+                  child: Align(
+                    alignment: const AlignmentDirectional(0.00, -1.00),
+                    child: Stack(
+                      alignment: const AlignmentDirectional(0.0, -1.0),
+                      children: [
+                        Align(
+                          alignment: const AlignmentDirectional(-1.00, 1.00),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(8.0),
+                            child: Image.network(
+                              'https://static.vecteezy.com/system/resources/previews/024/044/186/non_2x/money-coins-clipart-transparent-background-free-png.png',
+                              width: 63.0,
+                              height: 55.0,
+                              fit: BoxFit.fill,
+                            ),
                           ),
                         ),
-                      ),
-                      Align(
-                        alignment: const AlignmentDirectional(0.80, 0.00),
-                        child: Text(
-                          getCurrentTimestamp.toString(),
-                          style: FlutterFlowTheme.of(context).titleMedium,
+                        Align(
+                          alignment: const AlignmentDirectional(0.80, 0.00),
+                          child: Text(
+                            FFAppState().Coins.toString(),
+                            style: FlutterFlowTheme.of(context).titleMedium,
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               ),
