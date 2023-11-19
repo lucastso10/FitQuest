@@ -11,7 +11,12 @@ import 'display_activity_model.dart';
 export 'display_activity_model.dart';
 
 class DisplayActivityWidget extends StatefulWidget {
-  const DisplayActivityWidget({super.key});
+  const DisplayActivityWidget({
+    super.key,
+    this.date,
+  });
+
+  final DateTime? date;
 
   @override
   _DisplayActivityWidgetState createState() => _DisplayActivityWidgetState();
@@ -209,13 +214,23 @@ class _DisplayActivityWidgetState extends State<DisplayActivityWidget> {
                       iconPadding:
                           const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                       color: const Color(0xFF2496E9),
-                      textStyle:
-                          FlutterFlowTheme.of(context).titleSmall.override(
-                                fontFamily: 'Readex Pro',
-                                color: FFAppState().comecoUnvalid
-                                    ? FlutterFlowTheme.of(context).error
-                                    : FlutterFlowTheme.of(context).alternate,
-                              ),
+                      textStyle: FlutterFlowTheme.of(context)
+                          .titleSmall
+                          .override(
+                            fontFamily: 'Readex Pro',
+                            color: valueOrDefault<Color>(
+                              () {
+                                if (FFAppState().comecoUnvalid) {
+                                  return FlutterFlowTheme.of(context).error;
+                                } else if (FFAppState().comefiUnvalid) {
+                                  return FlutterFlowTheme.of(context).error;
+                                } else {
+                                  return FlutterFlowTheme.of(context).alternate;
+                                }
+                              }(),
+                              Colors.white,
+                            ),
+                          ),
                       elevation: 3.0,
                       borderSide: const BorderSide(
                         color: Colors.transparent,
@@ -288,13 +303,23 @@ class _DisplayActivityWidgetState extends State<DisplayActivityWidget> {
                       iconPadding:
                           const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                       color: const Color(0xFF2496E9),
-                      textStyle:
-                          FlutterFlowTheme.of(context).titleSmall.override(
-                                fontFamily: 'Readex Pro',
-                                color: FFAppState().finalUnvalid
-                                    ? FlutterFlowTheme.of(context).error
-                                    : FlutterFlowTheme.of(context).alternate,
-                              ),
+                      textStyle: FlutterFlowTheme.of(context)
+                          .titleSmall
+                          .override(
+                            fontFamily: 'Readex Pro',
+                            color: valueOrDefault<Color>(
+                              () {
+                                if (FFAppState().finalUnvalid) {
+                                  return FlutterFlowTheme.of(context).error;
+                                } else if (FFAppState().comefiUnvalid) {
+                                  return FlutterFlowTheme.of(context).error;
+                                } else {
+                                  return FlutterFlowTheme.of(context).alternate;
+                                }
+                              }(),
+                              FlutterFlowTheme.of(context).alternate,
+                            ),
+                          ),
                       elevation: 3.0,
                       borderSide: const BorderSide(
                         color: Colors.transparent,
@@ -427,6 +452,14 @@ class _DisplayActivityWidgetState extends State<DisplayActivityWidget> {
                         });
 
                         context.pushNamed('HomePage');
+
+                        setState(() {
+                          FFAppState().NomeUnvalid = false;
+                          FFAppState().semanaUnvalid = false;
+                          FFAppState().comecoUnvalid = false;
+                          FFAppState().finalUnvalid = false;
+                          FFAppState().comefiUnvalid = false;
+                        });
                       }
                     },
                     text: 'Criar Atividade',
@@ -463,8 +496,10 @@ class _DisplayActivityWidgetState extends State<DisplayActivityWidget> {
                     onPressed: () async {
                       final datePicked3Date = await showDatePicker(
                         context: context,
-                        initialDate: getCurrentTimestamp,
-                        firstDate: getCurrentTimestamp,
+                        initialDate: ((widget.date ?? getCurrentTimestamp) ??
+                            DateTime.now()),
+                        firstDate: ((widget.date ?? getCurrentTimestamp) ??
+                            DateTime.now()),
                         lastDate: DateTime(2050),
                         builder: (context, child) {
                           return wrapInMaterialDatePickerTheme(
@@ -489,7 +524,7 @@ class _DisplayActivityWidgetState extends State<DisplayActivityWidget> {
                             selectedDateTimeForegroundColor:
                                 FlutterFlowTheme.of(context).info,
                             actionButtonForegroundColor:
-                                FlutterFlowTheme.of(context).primaryText,
+                                FlutterFlowTheme.of(context).alternate,
                             iconSize: 24.0,
                           );
                         },
@@ -519,9 +554,12 @@ class _DisplayActivityWidgetState extends State<DisplayActivityWidget> {
                       textStyle:
                           FlutterFlowTheme.of(context).titleSmall.override(
                                 fontFamily: 'Readex Pro',
-                                color: FFAppState().semanaUnvalid
-                                    ? FlutterFlowTheme.of(context).error
-                                    : FlutterFlowTheme.of(context).alternate,
+                                color: valueOrDefault<Color>(
+                                  FFAppState().semanaUnvalid
+                                      ? FlutterFlowTheme.of(context).error
+                                      : FlutterFlowTheme.of(context).alternate,
+                                  Colors.white,
+                                ),
                               ),
                       elevation: 3.0,
                       borderSide: const BorderSide(

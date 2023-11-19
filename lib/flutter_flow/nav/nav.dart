@@ -52,7 +52,16 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'DisplayActivity',
           path: '/displayActivity',
-          builder: (context, params) => const DisplayActivityWidget(),
+          builder: (context, params) => DisplayActivityWidget(
+            date: params.getParam('date', ParamType.DateTime),
+          ),
+        ),
+        FFRoute(
+          name: 'Created',
+          path: '/created',
+          builder: (context, params) => CreatedWidget(
+            index: params.getParam('index', ParamType.int),
+          ),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
