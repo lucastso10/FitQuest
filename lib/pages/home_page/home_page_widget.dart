@@ -1,6 +1,7 @@
 import '/flutter_flow/flutter_flow_calendar.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -329,7 +330,8 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                 'Created',
                                 queryParameters: {
                                   'index': serializeParam(
-                                    bruhIndex,
+                                    functions.checkindex(bruhItem,
+                                        FFAppState().Activities.toList()),
                                     ParamType.int,
                                   ),
                                 }.withoutNulls,
@@ -340,7 +342,15 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                               height: 60.0,
                               decoration: const BoxDecoration(
                                 color: Colors.white,
+                                boxShadow: [
+                                  BoxShadow(
+                                    blurRadius: 4.0,
+                                    color: Color(0x33000000),
+                                    offset: Offset(0.0, 2.0),
+                                  )
+                                ],
                               ),
+                              alignment: const AlignmentDirectional(0.00, -1.00),
                               child: Padding(
                                 padding: const EdgeInsetsDirectional.fromSTEB(
                                     12.0, 8.0, 12.0, 8.0),

@@ -1,5 +1,6 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -124,18 +125,18 @@ class _DisplayDayWidgetState extends State<DisplayDayWidget> {
                         const EdgeInsetsDirectional.fromSTEB(0.0, 120.0, 0.0, 0.0),
                     child: Builder(
                       builder: (context) {
-                        final bruh = FFAppState()
+                        final list = FFAppState()
                             .Activities
                             .where((e) =>
                                 dateTimeFormat('d/M', e.date) ==
-                                dateTimeFormat('d/M', e.date))
+                                dateTimeFormat('d/M', widget.dia))
                             .toList();
                         return ListView.builder(
                           padding: EdgeInsets.zero,
                           scrollDirection: Axis.vertical,
-                          itemCount: bruh.length,
-                          itemBuilder: (context, bruhIndex) {
-                            final bruhItem = bruh[bruhIndex];
+                          itemCount: list.length,
+                          itemBuilder: (context, listIndex) {
+                            final listItem = list[listIndex];
                             return Padding(
                               padding: const EdgeInsetsDirectional.fromSTEB(
                                   0.0, 0.0, 0.0, 1.0),
@@ -149,7 +150,8 @@ class _DisplayDayWidgetState extends State<DisplayDayWidget> {
                                     'Created',
                                     queryParameters: {
                                       'index': serializeParam(
-                                        bruhIndex,
+                                        functions.checkindex(listItem,
+                                            FFAppState().Activities.toList()),
                                         ParamType.int,
                                       ),
                                     }.withoutNulls,
@@ -180,7 +182,7 @@ class _DisplayDayWidgetState extends State<DisplayDayWidget> {
                                                   CrossAxisAlignment.start,
                                               children: [
                                                 Text(
-                                                  bruhItem.name,
+                                                  listItem.name,
                                                   style: FlutterFlowTheme.of(
                                                           context)
                                                       .bodyLarge
@@ -202,7 +204,7 @@ class _DisplayDayWidgetState extends State<DisplayDayWidget> {
                                                                 0.0, 0.0),
                                                     child: Text(
                                                       dateTimeFormat('Hm',
-                                                          bruhItem.timeStart!),
+                                                          listItem.timeStart!),
                                                       style: FlutterFlowTheme
                                                               .of(context)
                                                           .labelMedium
@@ -234,7 +236,7 @@ class _DisplayDayWidgetState extends State<DisplayDayWidget> {
                                         ),
                                         Text(
                                           formatNumber(
-                                            bruhItem.coins,
+                                            listItem.coins,
                                             formatType: FormatType.custom,
                                             format: '+#',
                                             locale: '',
