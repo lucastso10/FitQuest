@@ -4,8 +4,10 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:provider/provider.dart';
 import 'display_activity_model.dart';
 export 'display_activity_model.dart';
@@ -26,11 +28,22 @@ class _DisplayActivityWidgetState extends State<DisplayActivityWidget> {
   late DisplayActivityModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
+  late StreamSubscription<bool> _keyboardVisibilitySubscription;
+  bool _isKeyboardVisible = false;
 
   @override
   void initState() {
     super.initState();
     _model = createModel(context, () => DisplayActivityModel());
+
+    if (!isWeb) {
+      _keyboardVisibilitySubscription =
+          KeyboardVisibilityController().onChange.listen((bool visible) {
+        setState(() {
+          _isKeyboardVisible = visible;
+        });
+      });
+    }
 
     _model.textController ??= TextEditingController();
     _model.textFieldFocusNode ??= FocusNode();
@@ -40,6 +53,9 @@ class _DisplayActivityWidgetState extends State<DisplayActivityWidget> {
   void dispose() {
     _model.dispose();
 
+    if (!isWeb) {
+      _keyboardVisibilitySubscription.cancel();
+    }
     super.dispose();
   }
 
@@ -381,113 +397,117 @@ class _DisplayActivityWidgetState extends State<DisplayActivityWidget> {
                   ),
                 ),
               ),
-              Align(
-                alignment: const AlignmentDirectional(0.00, 1.00),
-                child: Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 70.0),
-                  child: FFButtonWidget(
-                    onPressed: () async {
-                      if (_model.textController.text != '') {
-                        setState(() {
-                          FFAppState().NomeUnvalid = false;
-                        });
-                      } else {
-                        setState(() {
-                          FFAppState().NomeUnvalid = true;
-                        });
-                      }
+              if (!(isWeb
+                  ? MediaQuery.viewInsetsOf(context).bottom > 0
+                  : _isKeyboardVisible))
+                Align(
+                  alignment: const AlignmentDirectional(0.00, 1.00),
+                  child: Padding(
+                    padding:
+                        const EdgeInsetsDirectional.fromSTEB(70.0, 70.0, 70.0, 70.0),
+                    child: FFButtonWidget(
+                      onPressed: () async {
+                        if (_model.textController.text != '') {
+                          setState(() {
+                            FFAppState().NomeUnvalid = false;
+                          });
+                        } else {
+                          setState(() {
+                            FFAppState().NomeUnvalid = true;
+                          });
+                        }
 
-                      if (_model.datePicked3 != null) {
-                        setState(() {
-                          FFAppState().semanaUnvalid = false;
-                        });
-                      } else {
-                        setState(() {
-                          FFAppState().semanaUnvalid = true;
-                        });
-                      }
+                        if (_model.datePicked3 != null) {
+                          setState(() {
+                            FFAppState().semanaUnvalid = false;
+                          });
+                        } else {
+                          setState(() {
+                            FFAppState().semanaUnvalid = true;
+                          });
+                        }
 
-                      if (_model.datePicked1 != null) {
-                        setState(() {
-                          FFAppState().comecoUnvalid = false;
-                        });
-                      } else {
-                        setState(() {
-                          FFAppState().comecoUnvalid = true;
-                        });
-                      }
+                        if (_model.datePicked1 != null) {
+                          setState(() {
+                            FFAppState().comecoUnvalid = false;
+                          });
+                        } else {
+                          setState(() {
+                            FFAppState().comecoUnvalid = true;
+                          });
+                        }
 
-                      if (_model.datePicked2 != null) {
-                        setState(() {
-                          FFAppState().finalUnvalid = false;
-                        });
-                      } else {
-                        setState(() {
-                          FFAppState().finalUnvalid = true;
-                        });
-                      }
+                        if (_model.datePicked2 != null) {
+                          setState(() {
+                            FFAppState().finalUnvalid = false;
+                          });
+                        } else {
+                          setState(() {
+                            FFAppState().finalUnvalid = true;
+                          });
+                        }
 
-                      if (_model.datePicked1! < _model.datePicked2!) {
-                        setState(() {
-                          FFAppState().comefiUnvalid = false;
-                        });
-                      } else {
-                        setState(() {
-                          FFAppState().comefiUnvalid = true;
-                        });
-                      }
+                        if (_model.datePicked1! < _model.datePicked2!) {
+                          setState(() {
+                            FFAppState().comefiUnvalid = false;
+                          });
+                        } else {
+                          setState(() {
+                            FFAppState().comefiUnvalid = true;
+                          });
+                        }
 
-                      if (!(FFAppState().NomeUnvalid ||
-                          FFAppState().semanaUnvalid ||
-                          FFAppState().comecoUnvalid ||
-                          FFAppState().finalUnvalid ||
-                          FFAppState().comefiUnvalid)) {
-                        setState(() {
-                          FFAppState().addToActivities(ActivityStruct(
-                            name: _model.textController.text,
-                            timeStart: _model.datePicked1,
-                            timeEnd: _model.datePicked2,
-                            coins: _model.dropDownValue,
-                            date: _model.datePicked3,
-                          ));
-                        });
+                        if (!(FFAppState().NomeUnvalid ||
+                            FFAppState().semanaUnvalid ||
+                            FFAppState().comecoUnvalid ||
+                            FFAppState().finalUnvalid ||
+                            FFAppState().comefiUnvalid)) {
+                          setState(() {
+                            FFAppState().addToActivities(ActivityStruct(
+                              name: _model.textController.text,
+                              timeStart: _model.datePicked1,
+                              timeEnd: _model.datePicked2,
+                              coins: _model.dropDownValue,
+                              date: _model.datePicked3,
+                            ));
+                          });
 
-                        context.pushNamed('HomePage');
+                          context.pushNamed('HomePage');
 
-                        setState(() {
-                          FFAppState().NomeUnvalid = false;
-                          FFAppState().semanaUnvalid = false;
-                          FFAppState().comecoUnvalid = false;
-                          FFAppState().finalUnvalid = false;
-                          FFAppState().comefiUnvalid = false;
-                        });
-                      }
-                    },
-                    text: 'Criar Atividade',
-                    options: FFButtonOptions(
-                      width: 250.0,
-                      height: 60.0,
-                      padding:
-                          const EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
-                      iconPadding:
-                          const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                      color: FlutterFlowTheme.of(context).success,
-                      textStyle:
-                          FlutterFlowTheme.of(context).titleSmall.override(
-                                fontFamily: 'Readex Pro',
-                                color: Colors.white,
-                                fontSize: 40.0,
-                              ),
-                      elevation: 3.0,
-                      borderSide: const BorderSide(
-                        color: Colors.transparent,
-                        width: 1.0,
+                          setState(() {
+                            FFAppState().NomeUnvalid = false;
+                            FFAppState().semanaUnvalid = false;
+                            FFAppState().comecoUnvalid = false;
+                            FFAppState().finalUnvalid = false;
+                            FFAppState().comefiUnvalid = false;
+                          });
+                        }
+                      },
+                      text: 'Criar Atividade',
+                      options: FFButtonOptions(
+                        width: 250.0,
+                        height: 60.0,
+                        padding: const EdgeInsetsDirectional.fromSTEB(
+                            24.0, 0.0, 24.0, 0.0),
+                        iconPadding:
+                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                        color: FlutterFlowTheme.of(context).success,
+                        textStyle:
+                            FlutterFlowTheme.of(context).titleSmall.override(
+                                  fontFamily: 'Readex Pro',
+                                  color: Colors.white,
+                                  fontSize: 40.0,
+                                ),
+                        elevation: 3.0,
+                        borderSide: const BorderSide(
+                          color: Colors.transparent,
+                          width: 1.0,
+                        ),
+                        borderRadius: BorderRadius.circular(8.0),
                       ),
-                      borderRadius: BorderRadius.circular(8.0),
                     ),
                   ),
                 ),
-              ),
               Align(
                 alignment: const AlignmentDirectional(-1.00, -1.00),
                 child: Padding(

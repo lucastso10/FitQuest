@@ -482,7 +482,7 @@ class _CreatedWidgetState extends State<CreatedWidget> {
                       context.safePop();
                     },
                     child: Text(
-                      'Delete',
+                      'Deletar',
                       style: FlutterFlowTheme.of(context).titleMedium.override(
                             fontFamily: 'Readex Pro',
                             color: FlutterFlowTheme.of(context).error,
@@ -509,7 +509,7 @@ class _CreatedWidgetState extends State<CreatedWidget> {
                       context.goNamed('DisplayActivity');
                     },
                     child: Text(
-                      'Edit',
+                      'Editar',
                       style: FlutterFlowTheme.of(context).titleMedium.override(
                             fontFamily: 'Readex Pro',
                             color: Colors.black,

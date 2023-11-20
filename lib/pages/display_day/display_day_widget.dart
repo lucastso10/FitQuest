@@ -164,118 +164,102 @@ class _DisplayDayWidgetState extends State<DisplayDayWidget> {
                                   child: Padding(
                                     padding: const EdgeInsetsDirectional.fromSTEB(
                                         12.0, 8.0, 12.0, 8.0),
-                                    child: InkWell(
-                                      splashColor: Colors.transparent,
-                                      focusColor: Colors.transparent,
-                                      hoverColor: Colors.transparent,
-                                      highlightColor: Colors.transparent,
-                                      onTap: () async {
-                                        context.pushNamed('DisplayActivity');
-                                      },
-                                      child: Row(
-                                        mainAxisSize: MainAxisSize.max,
-                                        children: [
-                                          Expanded(
-                                            child: Padding(
-                                              padding: const EdgeInsetsDirectional
-                                                  .fromSTEB(
-                                                      12.0, 0.0, 0.0, 0.0),
-                                              child: Column(
-                                                mainAxisSize: MainAxisSize.max,
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  Text(
-                                                    bruhItem.name,
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .bodyLarge
-                                                        .override(
-                                                          fontFamily:
-                                                              'Plus Jakarta Sans',
-                                                          color:
-                                                              const Color(0xFF14181B),
-                                                          fontSize: 16.0,
-                                                          fontWeight:
-                                                              FontWeight.w500,
-                                                        ),
-                                                  ),
-                                                  Expanded(
-                                                    child: Padding(
-                                                      padding:
-                                                          const EdgeInsetsDirectional
-                                                              .fromSTEB(
-                                                                  0.0,
-                                                                  4.0,
-                                                                  0.0,
-                                                                  0.0),
-                                                      child: Text(
-                                                        dateTimeFormat(
-                                                            'Hm',
-                                                            bruhItem
-                                                                .timeStart!),
-                                                        style: FlutterFlowTheme
-                                                                .of(context)
-                                                            .labelMedium
-                                                            .override(
-                                                              fontFamily:
-                                                                  'Plus Jakarta Sans',
-                                                              color: const Color(
-                                                                  0xFF57636C),
-                                                              fontSize: 14.0,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w500,
-                                                            ),
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      children: [
+                                        Expanded(
+                                          child: Padding(
+                                            padding:
+                                                const EdgeInsetsDirectional.fromSTEB(
+                                                    12.0, 0.0, 0.0, 0.0),
+                                            child: Column(
+                                              mainAxisSize: MainAxisSize.max,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  bruhItem.name,
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .bodyLarge
+                                                      .override(
+                                                        fontFamily:
+                                                            'Plus Jakarta Sans',
+                                                        color:
+                                                            const Color(0xFF14181B),
+                                                        fontSize: 16.0,
+                                                        fontWeight:
+                                                            FontWeight.w500,
                                                       ),
+                                                ),
+                                                Expanded(
+                                                  child: Padding(
+                                                    padding:
+                                                        const EdgeInsetsDirectional
+                                                            .fromSTEB(0.0, 4.0,
+                                                                0.0, 0.0),
+                                                    child: Text(
+                                                      dateTimeFormat('Hm',
+                                                          bruhItem.timeStart!),
+                                                      style: FlutterFlowTheme
+                                                              .of(context)
+                                                          .labelMedium
+                                                          .override(
+                                                            fontFamily:
+                                                                'Plus Jakarta Sans',
+                                                            color: const Color(
+                                                                0xFF57636C),
+                                                            fontSize: 14.0,
+                                                            fontWeight:
+                                                                FontWeight.w500,
+                                                          ),
                                                     ),
                                                   ),
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-                                          ClipRRect(
-                                            borderRadius:
-                                                BorderRadius.circular(8.0),
-                                            child: Image.network(
-                                              'https://static.vecteezy.com/system/resources/previews/024/044/186/non_2x/money-coins-clipart-transparent-background-free-png.png',
-                                              width: 50.0,
-                                              height: 50.0,
-                                              fit: BoxFit.contain,
-                                            ),
-                                          ),
-                                          Text(
-                                            formatNumber(
-                                              bruhItem.coins,
-                                              formatType: FormatType.custom,
-                                              format: '+#',
-                                              locale: '',
-                                            ),
-                                            textAlign: TextAlign.end,
-                                            style: FlutterFlowTheme.of(context)
-                                                .labelLarge
-                                                .override(
-                                                  fontFamily:
-                                                      'Plus Jakarta Sans',
-                                                  color: const Color(0xFF57636C),
-                                                  fontSize: 16.0,
-                                                  fontWeight: FontWeight.w500,
                                                 ),
-                                          ),
-                                          ClipRRect(
-                                            borderRadius:
-                                                BorderRadius.circular(8.0),
-                                            child: Image.network(
-                                              'https://cdn-icons-png.flaticon.com/512/32/32213.png',
-                                              width: 30.0,
-                                              height: 20.0,
-                                              fit: BoxFit.contain,
+                                              ],
                                             ),
                                           ),
-                                        ],
-                                      ),
+                                        ),
+                                        ClipRRect(
+                                          borderRadius:
+                                              BorderRadius.circular(8.0),
+                                          child: Image.network(
+                                            'https://static.vecteezy.com/system/resources/previews/024/044/186/non_2x/money-coins-clipart-transparent-background-free-png.png',
+                                            width: 50.0,
+                                            height: 50.0,
+                                            fit: BoxFit.contain,
+                                          ),
+                                        ),
+                                        Text(
+                                          formatNumber(
+                                            bruhItem.coins,
+                                            formatType: FormatType.custom,
+                                            format: '+#',
+                                            locale: '',
+                                          ),
+                                          textAlign: TextAlign.end,
+                                          style: FlutterFlowTheme.of(context)
+                                              .labelLarge
+                                              .override(
+                                                fontFamily: 'Plus Jakarta Sans',
+                                                color: const Color(0xFF57636C),
+                                                fontSize: 16.0,
+                                                fontWeight: FontWeight.w500,
+                                              ),
+                                        ),
+                                        ClipRRect(
+                                          borderRadius:
+                                              BorderRadius.circular(8.0),
+                                          child: Image.network(
+                                            'https://cdn-icons-png.flaticon.com/512/32/32213.png',
+                                            width: 30.0,
+                                            height: 20.0,
+                                            fit: BoxFit.contain,
+                                          ),
+                                        ),
+                                      ],
                                     ),
                                   ),
                                 ),

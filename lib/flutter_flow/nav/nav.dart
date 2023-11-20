@@ -30,12 +30,38 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       initialLocation: '/',
       debugLogDiagnostics: true,
       refreshListenable: appStateNotifier,
-      errorBuilder: (context, state) => const HomePageWidget(),
+      errorBuilder: (context, state) => appStateNotifier.showSplashImage
+          ? Builder(
+              builder: (context) => Container(
+                color: Colors.transparent,
+                child: Center(
+                  child: Image.asset(
+                    'assets/images/Screenshot_from_2023-11-15_15-32-14.png',
+                    width: 300.0,
+                    fit: BoxFit.fill,
+                  ),
+                ),
+              ),
+            )
+          : const HomePageWidget(),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
-          builder: (context, _) => const HomePageWidget(),
+          builder: (context, _) => appStateNotifier.showSplashImage
+              ? Builder(
+                  builder: (context) => Container(
+                    color: Colors.transparent,
+                    child: Center(
+                      child: Image.asset(
+                        'assets/images/Screenshot_from_2023-11-15_15-32-14.png',
+                        width: 300.0,
+                        fit: BoxFit.fill,
+                      ),
+                    ),
+                  ),
+                )
+              : const HomePageWidget(),
         ),
         FFRoute(
           name: 'HomePage',
