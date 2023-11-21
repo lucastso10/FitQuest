@@ -1,7 +1,7 @@
 # FitQuest
 
-A new Flutter project.
+Um aplicativo para te ajudar a criar hábitos mais saudáveis
 
-## Getting Started
+## Começando
 
-FlutterFlow projects are built to run on the Flutter _stable_ release.
+Esse projeto é feito para rodar no ultimo lançamento do flutter
