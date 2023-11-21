@@ -157,7 +157,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(8.0),
                             child: Image.network(
-                              'https://cdn.icon-icons.com/icons2/2385/PNG/512/hamburger_menu_icon_144302.png',
+                              'https://icons.veryicon.com/png/o/miscellaneous/linear-icon-45/hamburger-menu-5.png',
                               width: 278.0,
                               height: 184.0,
                               fit: BoxFit.cover,
